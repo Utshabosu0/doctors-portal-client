@@ -1,7 +1,6 @@
 import React from 'react';
-import { toast } from 'react-toastify';
 
-const ReviewRow = ({ review, index, refetch, setDeletingReview }) => {
+const DoctorReviewRow = ({ review, index }) => {
     const { name,location,comment, specialty, img,email } = review;
 
     return (
@@ -16,11 +15,8 @@ const ReviewRow = ({ review, index, refetch, setDeletingReview }) => {
             <td>{location}</td>
             <td>{comment}</td>
             <td>{specialty}</td>
-            <td>
-                <label onClick={() => setDeletingReview(review)} for="delete-confirm-modal" class="btn btn-xs btn-error">Delete</label>
-            </td>
         </tr>
     );
 };
 
-export default ReviewRow;
+export default DoctorReviewRow;

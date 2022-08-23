@@ -1,4 +1,5 @@
 import './App.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './Pages/Shared/Navbar';
 import { Routes, Route, Link } from "react-router-dom";
 import Home from './Pages/Home/Home';
@@ -19,7 +20,7 @@ import RequireAdmin from './Pages/Login/RequireAdmin';
 import ManageDoctors from './Pages/Dashboard/ManageDoctors';
 import Payment from './Pages/Dashboard/Payment';
 import Reset from './Pages/Login/Reset';
-import Contact from './Pages/Contact/Contact';
+import Contacts from './Pages/Contact/Contacts';
 import Review from './Pages/Review/Review';
 import ManageReviews from './Pages/Dashboard/ManageReviews';
 import AdminAppointments from './Pages/Dashboard/AdminAppointments';
@@ -30,6 +31,11 @@ import MyPayment from './Pages/Dashboard/MyPayment';
 import DoctorAppointments from './Pages/Dashboard/DoctorAppointments';
 import PaymentModal from './Pages/Dashboard/PaymentModal';
 import UpdateBooking from './Pages/Dashboard/UpdateBooking';
+import Doctor from './Pages/Doctor/Doctor';
+import DoctorReview from './Pages/Dashboard/DoctorReview';
+import AddSchedule from './Pages/Dashboard/AddSchedule';
+import UpdateComment from './Pages/Dashboard/UpdateComment';
+import DoctorAddSchedule from './Pages/Dashboard/DoctorAddSchedule';
 
 function App() {
   return (
@@ -42,7 +48,8 @@ function App() {
             <About />
           </RequireAuth>
         } />
-        <Route path="contact" element={<Contact />} />
+        <Route path="contact" element={<Contacts />} />
+        <Route path="doctor" element={<Doctor/>} />
         <Route path="appointment" element={
           <RequireAuth>
             <Appointment />
@@ -72,11 +79,16 @@ function App() {
           <Route path="adminAppointment" element={<RequireAdmin><AdminAppointments></AdminAppointments></RequireAdmin>}></Route>
           <Route path="pay" element={<RequireAdmin><PaymentModal></PaymentModal> </RequireAdmin>}></Route>
           <Route path="updateBooking/:id" element={<RequireAdmin><UpdateBooking></UpdateBooking> </RequireAdmin>}></Route>
+          <Route path="addSchedule" element={<RequireAdmin><AddSchedule/> </RequireAdmin>}></Route>
+
           <Route path="users" element={<RequireAdmin><Users></Users></RequireAdmin>}></Route>
           <Route path="addDoctor" element={<RequireAdmin><AddDoctor></AddDoctor></RequireAdmin>}></Route>
           <Route path="manageDoctor" element={<RequireAdmin><ManageDoctors></ManageDoctors></RequireAdmin>}></Route>
-          <Route path="manageReview" element={<RequireDoctor><ManageReviews></ManageReviews> </RequireDoctor>}></Route>
+          <Route path="manageReview" element={<RequireAdmin><ManageReviews></ManageReviews> </RequireAdmin>}></Route>
+          <Route path="doctorReview" element={<RequireDoctor><DoctorReview></DoctorReview> </RequireDoctor>}></Route>
           <Route path="doctorAppointment" element={<RequireDoctor><DoctorAppointments></DoctorAppointments> </RequireDoctor>}></Route>
+          <Route path="updateComment/:id" element={<RequireDoctor><UpdateComment></UpdateComment> </RequireDoctor>}></Route>
+          <Route path="doctorAddSchedule" element={<RequireDoctor><DoctorAddSchedule></DoctorAddSchedule> </RequireDoctor>}></Route>
 
         </Route>
         <Route path="login" element={<Login />} />

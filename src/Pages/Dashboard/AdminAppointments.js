@@ -1,3 +1,5 @@
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // import {  useNavigate } from 'react-router-dom';
@@ -43,29 +45,47 @@ const AdminAppointments = () => {
 
     }, [])
 
-   
+    const handleRemove = id => {
+        fetch(`http://localhost:5000/booking/${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    alert('Cancel Your Appointment');
+                    const cancelAppointment = appointments.filter(appointment => appointment._id !== id);
+                    setAppointments(cancelAppointment);
+                }
+            });
+    
+
+}
     return (
         <div>
             <h2>Appointments: {appointments.length}</h2>
             <div class="flex justify-end ">
-            <Link to={`/dashboard/pay`}><button className='btn btn-xs btn-success'>User Payment Page</button></Link>             
+            <Link to={`/dashboard/pay`}><button className='btn btn-xs btn-success'>Payment Page</button></Link>             
             </div>
             <div class="overflow-x-auto">
                 <table class="table w-full">
                     <thead>
                         <tr>
                             <th></th>
+                            <th>AppointmentID</th>
                             <th>Name</th>
                             <th>Date</th>
                             <th>Time</th>
                             <th>Treatment</th>
                             <th>Payment Status</th>
+                            <th>Action</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         {
                             appointments.map((a, index) => <tr key={a._id}>
                                 <th>{index + 1}</th>
+                                <td>{a._id}</td>
                                 <td>{a.patientName}</td>
                                 <td>{a.date}</td>
                                 <td>{a.slot}</td>
@@ -77,6 +97,12 @@ const AdminAppointments = () => {
                                         <p><span className='text-success'>Paid</span></p>
                                         {/* <p>Transaction id: <span className='text-success'>{a.transactionId}</span></p> */}
                                     </div>}
+                                </td>
+                                <td>
+                                <button
+                         onClick={() => handleRemove(a._id)}
+                        className='delete-button text-center '>
+                        <FontAwesomeIcon className='delete-icon text-red-600 text-2xl' icon={faTrashAlt}></FontAwesomeIcon></button>
                                 </td>
                             </tr>)
                         }

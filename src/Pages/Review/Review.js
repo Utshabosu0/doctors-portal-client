@@ -140,6 +140,7 @@ const onSubmits = async data => {
                 const img = result.data.url;
                 const review = {
                     name:data.name,
+                    location:data.location,
                     comment:data.comment,
                     email:user.email,
                     specialty:data.specialty,
@@ -157,7 +158,7 @@ const onSubmits = async data => {
                     .then(res => res.json())
                     .then(inserted => {
                         if (inserted.insertedId) {
-                            toast.success('successfully')
+                            toast.success('Thanks for the review')
                             reset();
                         }
                         else {
@@ -175,29 +176,54 @@ if (isLoading) {
 }
 
 return (
-    <div className='pb-5'>
-        <h2 className="text-2xl">What You Say</h2>
+    <>
+    <div className='mt-20'></div><br /><br /> 
+    <div className='flex h-screen justify-center items-center '>
+            <div className="card w-96 bg-base-100 shadow-xl bg-blue-300">
+                <div className="card-body">
+                    <h2 className="text-center text-2xl font-bold">What's Your Review</h2>
         <form onSubmit={handleSubmit(onSubmits)}>
 
-            <div className="form-control w-full max-w-xs">
-                <label className="label">
-                    <span className="label-text">Name</span>
-                </label>
-                <input
-                    type="text"
-                    placeholder="Your Name"
-                    className="input input-bordered w-full max-w-xs"
-                    {...register("name", {
-                        required: {
-                            value: true,
-                            message: 'Name is Required'
-                        }
-                    })}
-                />
-                <label className="label">
-                    {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
-                </label>
-            </div>
+        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            
+                            <input
+                                type="text"
+                                placeholder="Your Name"
+                                className="input input-bordered w-full max-w-xs"
+                                {...register("name", {
+                                    required: {
+                                        value: true,
+                                        message: 'Name is Required'
+                                    }
+                                })}
+                            />
+                            <label className="label">
+                                {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
+                            </label>
+                        </div>
+        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Location</span>
+                            </label>
+                            
+                            <input
+                                type="text"
+                                placeholder="Your Location"
+                                className="input input-bordered w-full max-w-xs"
+                                {...register("location", {
+                                    required: {
+                                        value: true,
+                                        message: 'Location is Required'
+                                    }
+                                })}
+                            />
+                            <label className="label">
+                                {errors.location?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
+                            </label>
+                        </div>
             {/* <div className="form-control w-full max-w-xs">
                 <label className="label">
                     <span className="label-text">Address</span>
@@ -224,6 +250,7 @@ return (
                 <textarea
                     type="text"
                     placeholder="Your Review"
+                    
                     className="textarea textarea-bordered w-full max-w-xs"
                     {...register("comment", {
                         required: {
@@ -238,44 +265,43 @@ return (
             </div>
 
             <div className="form-control w-full max-w-xs">
-                <label className="label">
-                    <span className="label-text">Email</span>
-                </label>
-                <input
-                    type="email"
-                    disabled value={user?.email || ''}
-                    placeholder="Your Email"
-                    className="input input-bordered w-full max-w-xs"
-                    {...register("email", {
-                        // required: {
-                        //     value: true,
-                        //     message: 'Email is Required'
-                        // },
-                        pattern: {
-                            value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-                            message: 'Provide a valid Email'
-                        }
-                    })}
-                />
-                <label className="label">
-                    {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
-                    {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
-                </label>
-            </div>
+                            <label className="label">
+                                <span className="label-text">Email</span>
+                            </label>
+                            <input
+                                type="email"
+                                placeholder="Your Email"
+                                className="input input-bordered w-full max-w-xs"
+                                {...register("email", {
+                                    required: {
+                                        value: true,
+                                        message: 'Email is Required'
+                                    },
+                                    pattern: {
+                                        value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                                        message: 'Provide a valid Email'
+                                    }
+                                })}
+                            />
+                            <label className="label">
+                                {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
+                                {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
+                            </label>
+                        </div>
 
-            <div className="form-control w-full max-w-xs">
-                <label className="label">
-                    <span className="label-text">Specialty</span>
-                </label>
-                <select {...register('specialty')} class="select input-bordered w-full max-w-xs">
-                    {
-                        services.map(service => <option
-                            key={service._id}
-                            value={service.name}
-                        >{service.name}</option>)
-                    }
-                </select>
-            </div>
+                        <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text">Specialty</span>
+                    </label>
+                    <select {...register('specialty')} class="select input-bordered w-full max-w-xs">
+                        {
+                            services.map(service => <option
+                                key={service._id}
+                                value={service.name}
+                            >{service.name}</option>)
+                        }
+                    </select>
+                </div>
 
             <div className="form-control w-full max-w-xs">
                 <label className="label">
@@ -297,9 +323,12 @@ return (
             </div>
             <br />
 
-            <input className='btn w-full max-w-xs text-white' type="submit" value="Add" />
+            <input className='btn w-full max-w-xs text-white bg-red-600' type="submit" value="Review Submit" />
         </form>
-    </div>
+        </div>
+            </div>
+        </div >
+        </>
 );
 };
 

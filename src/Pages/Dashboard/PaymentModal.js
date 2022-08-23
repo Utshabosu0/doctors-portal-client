@@ -14,9 +14,10 @@ const PaymentModal = () => {
         const pay = {
             price:data.price,
             phone: data.phone,
+            appointment: data.appointment,
             name: data.name,
                     email: data.email,
-                    specialty: data.specialty,
+                    treatment: data.treatment,
         }
             fetch('http://localhost:5000/payments', {
                 method: 'POST',
@@ -29,11 +30,11 @@ const PaymentModal = () => {
                 .then(res => res.json())
                 .then(inserted =>{
                     if(inserted.insertedId){
-                        toast.success('successfully')
+                        toast.success('successfully Payment')
                         reset();
                     }
                     else{
-                        toast.error('Failed to add the doctor');
+                        toast.error('Failed Payment');
                     }
                 })
     }
@@ -41,16 +42,36 @@ const PaymentModal = () => {
         return <Loading></Loading>
     }
     return (
-        <div className='flex h-screen justify-center items-center mt-8'>
+        <div className='flex h-screen justify-center items-center mt-20'>
             <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
                     <h2 className="text-center text-2xl font-bold">Payment Page</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Appointment</span>
+                            </label>
 
+                            <input
+                                type="text"
+                                placeholder="Your AppointmentId"
+                                className="input input-bordered w-full max-w-xs"
+                                {...register("appointment", {
+                                    required: {
+                                        value: true,
+                                        message: 'Appointment is Required'
+                                    }
+                                })}
+                            />
+                            <label className="label">
+                                {errors.appointment?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
+                            </label>
+                        </div>
                     <div className="form-control w-full max-w-xs">
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
+
                             <input
                                 type="text"
                                 placeholder="Your Name"
@@ -93,9 +114,9 @@ const PaymentModal = () => {
                         </div>
                         <div className="form-control w-full max-w-xs">
                     <label className="label">
-                        <span className="label-text">Specialty</span>
+                        <span className="label-text">treatment</span>
                     </label>
-                    <select {...register('specialty')} class="select input-bordered w-full max-w-xs">
+                    <select {...register('treatment')} class="select input-bordered w-full max-w-xs">
                         {
                             services.map(service => <option
                                 key={service._id}

@@ -1,48 +1,50 @@
 
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-// import {  useNavigate } from 'react-router-dom';
 // import { signOut } from 'firebase/auth';
-// import { useAuthState } from 'react-firebase-hooks/auth';
-// import auth from '../../firebase.init';
+import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link } from 'react-router-dom';
+// import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const DoctorAppointments = () => {
 
     const [appointments, setAppointments] = useState([]);
     console.log(appointments)
-    // const [user] = useAuthState(auth);
+    
+    const [user] = useAuthState(auth);
     // const navigate = useNavigate()
 
-    // useEffect(() => {
-    //     if (user) {
-    //         fetch(`http://localhost:5000/booking?patient=${user.email}`, {
-    //             method: 'GET',
-    //             headers: {
-    //                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
-    //             }
-    //         })
-    //             .then(res => {
-    //                 console.log('res', res);
-    //                 if (res.status === 401 || res.status === 403) {
-    //                     signOut(auth);
-    //                     localStorage.removeItem('accessToken');
-    //                     navigate('/');
-    //                 }
-    //                 return res.json()
-    //             })
-    //             .then(data => {
-
-    //                 setAppointments(data);
-    //             });
-    //     }
-    // }, [user])
-
     useEffect(() => {
-        fetch(`http://localhost:5000/bookings`)
-            .then(res => res.json())
-            .then(data => setAppointments(data));
+        if (user) {
+            fetch(`http://localhost:5000/bookingss?doctorName=${user.name}`, {
+                method: 'GET',
+                headers: {
+                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+                .then(res => {
+                    console.log('res', res);
+                    if (res.status === 401 || res.status === 403) {
+                        // signOut(auth);
+                        // localStorage.removeItem('accessToken');
+                        // navigate('/');
+                    }
+                    return res.json()
+                })
+                .then(data => {
 
-    }, [])
+                    setAppointments(data);
+                });
+        }
+    }, [user])
+  
+
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/bookings`)
+    //         .then(res => res.json())
+    //         .then(data => setAppointments(data));
+
+    // }, [])
 
     return (
         <div>
@@ -56,6 +58,7 @@ const DoctorAppointments = () => {
                             <th>Date</th>
                             <th>Time</th>
                             <th>Treatment</th>
+                            <th>Message</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,6 +69,7 @@ const DoctorAppointments = () => {
                                 <td>{a.date}</td>
                                 <td>{a.slot}</td>
                                 <td>{a.treatment}</td>
+                                <td><Link to={`/dashboard/updateComment/${a._id}`}><button className='btn btn-xs btn-success'>Comment</button></Link></td>
                             </tr>)
                         }
 

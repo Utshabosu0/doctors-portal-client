@@ -1,20 +1,26 @@
 import React from 'react';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useSendEmailVerification ,useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
 import { Link, useNavigate } from 'react-router-dom';
 import useToken from '../../hooks/useToken';
+import { toast } from 'react-toastify';
+
 
 const SignUp = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit,reset } = useForm();
     const [
         createUserWithEmailAndPassword,
         user,
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
+
+    const [sendEmailVerification, sending, sendError] = useSendEmailVerification(
+        auth
+      );
 
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
@@ -24,22 +30,47 @@ const SignUp = () => {
 
     let signInError;
 
-    if (loading || gLoading || updating) {
+    if (loading || gLoading || updating||sending) {
         return <Loading></Loading>
     }
 
-    if (error || gError || updateError) {
+    if (error || gError || updateError||sendError) {
         signInError = <p className='text-red-500'><small>{error?.message || gError?.message || updateError?.message}</small></p>
     }
 
     if (token) {
-        navigate('/appointment');
+        navigate('/add');
     }
 
     const onSubmit = async data => {
         await createUserWithEmailAndPassword(data.email, data.password);
+        await sendEmailVerification(data.email);
         await updateProfile({ displayName: data.name });
         console.log('update done');
+
+        // const user = {
+        //     name:data.name,
+        //     email:data.email
+        // }
+        // // send to your database 
+        // fetch('http://localhost:5000/user', {
+        //     method: 'POST',
+        //     headers: {
+        //         'content-type': 'application/json',
+        //         // authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        //     },
+        //     body: JSON.stringify(user)
+        // })
+        //     .then(res => res.json())
+        //     .then(inserted => {
+        //         if (inserted.insertedId) {
+        //              toast.success('Thanks ')
+        //             reset();
+        //         }
+        //         else {
+        //             toast.error('Failed ');
+        //         }
+        //     })
     }
     return (
         <div className='flex h-screen justify-center items-center'>
@@ -74,7 +105,7 @@ const SignUp = () => {
                             </label>
                             <input
                                 type="email"
-                                placeholder="Your Email"
+                                placeholder="Your Valid Email"
                                 className="input input-bordered w-full max-w-xs"
                                 {...register("email", {
                                     required: {
@@ -120,7 +151,7 @@ const SignUp = () => {
                         {signInError}
                         <input className='btn w-full max-w-xs text-white' type="submit" value="Sign Up" />
                     </form>
-                    <p><small>Already have an account? <Link className='text-primary' to="/login">Please login</Link></small></p>
+                    <p><small>Already have an account? <Link className='text-indigo-600' to="/login">Please login</Link></small></p>
                     <div className="divider">OR</div>
                     <button
                         onClick={() => signInWithGoogle()}

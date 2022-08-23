@@ -3,7 +3,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { Link, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
-
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const MyAppointments = () => {
 
     const [appointments, setAppointments] = useState([]);
@@ -34,11 +35,32 @@ const MyAppointments = () => {
         }
     }, [user])
 
+    const handleRemove = id => {
+            fetch(`http://localhost:5000/booking/${id}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        alert('Cancel Your Appointment');
+                        const cancelAppointment = appointments.filter(appointment => appointment._id !== id);
+                        setAppointments(cancelAppointment);
+                    }
+                });
+        
+
+    }
+    const todayDate = new Date();
+    todayDate.setHours(0,0,0,0);
+
+    const futureApointments = appointments.filter(appointment => new Date(appointment.date) >= todayDate);
+    console.log(futureApointments, 'future');
+
+    
     return (
         <div>
-            <h2>My Appointments: {appointments.length}</h2>
+            <h2>My Appointments: {futureApointments.length}</h2>
             <div class="flex justify-end ">
-            <Link to="/review"><button className='btn btn-xs btn-primary'>Your Review</button></Link>             
             </div>
             <div class="overflow-x-auto">
                 <table class="table w-full">
@@ -50,12 +72,14 @@ const MyAppointments = () => {
                             <th>Time</th>
                             <th>Treatment</th>
                             <th>Payment</th>
+                            <th>Action</th>
+                            <th>Review</th>
                         </tr>
                     </thead>
                     
                     <tbody>
                         {
-                            appointments.map((a, index) => <tr key={a._id}>
+                            futureApointments.map((a, index) => <tr key={a._id}>
                                 <th>{index + 1}</th>
                                 <td>{a.patientName}</td>
                                 <td>{a.date}</td>
@@ -65,8 +89,18 @@ const MyAppointments = () => {
                                     {(a.price && !a.paid) && <Link to={`/dashboard/payment/${a._id}`}><button className='btn btn-xs btn-success'>pay</button></Link>}
                                     {(a.price && a.paid) && <div>
                                         <p><span className='text-success'>Paid</span></p>
-                                        <p>Transaction id: <span className='text-success'>{a.transactionId}</span></p>
+                                        {/* <p>Transaction id: <span className='text-success'>{a.transactionId}</span></p> */}
                                     </div>}
+                                </td>
+                                <td>
+                                <button
+                         onClick={() => handleRemove(a._id)}
+                        className='delete-button text-center '>
+                        <FontAwesomeIcon className='delete-icon text-red-600 text-2xl' icon={faTrashAlt}></FontAwesomeIcon></button>
+                                </td>
+                                <td>
+                                <Link to="/review"><button className='btn btn-success'>Your Review</button></Link>             
+
                                 </td>
                             </tr>)
                         }

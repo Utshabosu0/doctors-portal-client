@@ -8,28 +8,31 @@ const Testimonials = () => {
     const reviews = [
         {
             _id:1,
-            name: 'Winson Herry',
-            review: '',
+            name: 'Winson',
+            review: 'Dr.rafiq is a great doctor! He is very understanding and listens to your concerns. He takes time with the patient to help them with their health issues! I highly recommend him to anyone looking for a specialist',
             location: 'savar',
+            specialty: 'Teeth Orthodontics',
             img: people1
         },
         {
             _id:2,
-            name: 'Winson ',
-            review: '',
+            name: 'Luna',
+            review: 'Dr.mijan is a great doctor! He is very understanding and listens to your concerns. He takes time with the patient to help them with their health issues! I highly recommend him to anyone looking for a specialist',
             location: 'Uttara',
+            specialty: 'Teeth Cleaning',
             img: people2
         },
         {
             _id:3,
-            name: ' Herry',
-            review: '',
+            name: 'Mila',
+            review: 'Dr.rafiq is a great doctor! He is very understanding and listens to your concerns. He takes time with the patient to help them with their health issues! I highly recommend him to anyone looking for a specialist',
             location: 'savar',
+            specialty: 'Cosmetic Dentistry',
             img: people3
         },
     ];
     return (
-        <section className='my-28'>
+        <section className='my-24'>
             <div className='flex justify-between'>
                 <div>
                     <h4 className="text-xl text-primary font-bold">Testimonials</h4>

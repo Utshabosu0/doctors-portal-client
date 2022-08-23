@@ -74,27 +74,24 @@ const MyPayment = () => {
             <Table striped bordered hover responsive className="table-sm">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>AppointmentID</th>
                 <th>Name</th>
-                            <th>Treatment</th>
+                <th>Email</th>
                             <th>Price</th>
-                            <th>Date</th>
+                            <th>Treatment</th>
                             <th>Payment Status</th>
-                            
-                <th>Invoice</th>
               </tr>
             </thead>
             <tbody>
               {payments.map((payment) => (
                 <tr key={payment._id}>
-                  <td>{payment._id}</td>
+                  <td>{payment.appointment}</td>
                   <td>{payment.name}</td>
+                  <td>{payment.email}</td>
                                 <td>{payment.price}</td>
                                 <td>{payment.treatment}</td>
-                  <td>{payment.createdAt}</td>
-                  <td>{payment.transactionId}</td>
                   <td>
-                    {payment?.price ? (
+                    {payment?.appointment?(
                       <ReactToPrint
                         trigger={() => (
                           <button className="btn btn-success mb-1">
@@ -141,20 +138,13 @@ const MyPayment = () => {
                           </tr> */}
                         </thead>
                         <tbody>
+                          
                           <tr>
                             <td
                               colSpan={4}
                               className="d-flex justify-content-end me-2"
                             >
-                              <h4 className="fw-bold">Delivery to: {user.displayName}</h4>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td
-                              colSpan={4}
-                              className="d-flex justify-content-end me-2"
-                            >
-                              <h4 className="fw-bold">Order Id: {payment._id}</h4>
+                              <h4 className="fw-bold">Payment Id: {payment._id}</h4>
                             </td>
                           </tr>
                           <tr>
@@ -163,7 +153,7 @@ const MyPayment = () => {
                               className="d-flex justify-content-end me-2"
                             >
                               <h4 className="fw-bold">
-                                Order Date: {payment.createdAt}
+                                Name: {payment.name}
                               </h4>
                             </td>
                           </tr>
@@ -173,7 +163,7 @@ const MyPayment = () => {
                               className="d-flex justify-content-end me-2"
                             >
                               <h4 className="fw-bold">
-                                Tax Price: {payment.Price} Taka
+                                Email: {payment.email}
                               </h4>
                             </td>
                           </tr>
@@ -183,7 +173,7 @@ const MyPayment = () => {
                               className="d-flex justify-content-end me-2"
                             >
                               <h4 className="fw-bold">
-                                Discount Price: {payment.transactionId} Taka
+                                Phone: {payment.phone}
                               </h4>
                             </td>
                           </tr>
@@ -193,7 +183,27 @@ const MyPayment = () => {
                               className="d-flex justify-content-end me-2"
                             >
                               <h4 className="fw-bold">
-                                Total Cost: {payment.name} Taka
+                              Treatment: {payment.treatment} 
+                              </h4>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td
+                              colSpan={4}
+                              className="d-flex justify-content-end me-2"
+                            >
+                              <h4 className="fw-bold">
+                                Price: {payment.price} Taka
+                              </h4>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td
+                              colSpan={4}
+                              className="d-flex justify-content-end me-2"
+                            >
+                              <h4 className="fw-bold">
+                              Transaction Id: {payment.transactionId} 
                               </h4>
                             </td>
                           </tr>

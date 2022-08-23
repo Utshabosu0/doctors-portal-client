@@ -62,9 +62,6 @@ const handleUpdateUser = async e => {
 
 
     return (
-        <div>
-            <p><small>{id}</small></p>
-        <div>
 
             <form onSubmit={handleUpdateUser}>
 
@@ -177,8 +174,7 @@ const handleUpdateUser = async e => {
 
 <input className='btn w-full max-w-xs text-white' type="submit" value="Add" />
 </form>
-        </div>
-        </div>
+       
     );
 };
 

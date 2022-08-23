@@ -11,6 +11,17 @@ const AvailableAppointments = ({ date }) => {
     const formattedDate = format(date, 'PP');
     const { data: services, isLoading, refetch } = useQuery(['available', formattedDate], () => fetch(`http://localhost:5000/available?date=${formattedDate}`)
         .then(res => res.json()))
+    
+    // day finding
+
+    const weekday = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+    const d = new Date(date);
+    let today = weekday[d.getDay()];
+    
+
+    // console.log(services)
+    const matchedServices = services?.filter(service => service?.days?.includes(today));
+    // console.log(matchedServices)
 
     if(isLoading){
         return <Loading></Loading>
@@ -21,7 +32,7 @@ const AvailableAppointments = ({ date }) => {
             <h4 className='text-2xl text-dark text-center my-12'>Available Appointments on {format(date, 'PP')}</h4>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {
-                    services.map(service => <Service
+                    matchedServices.map(service => <Service
                         key={service._id}
                         service={service}
                         setTreatment={setTreatment}

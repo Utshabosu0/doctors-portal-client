@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import Footer from '../Shared/Footer';
 
 const About = () => {
     const [abouts, setAbouts] = useState([]);
@@ -28,58 +29,33 @@ const About = () => {
                 })
                 .then(data => {
 
-                    setAbouts(data);
+                    setAbouts(data[0]);
                 });
         }
     }, [user])
     return (
-        <div>
-            <h2 className="text-2xl">Name : {user.displayName} <br />   Email: {user.email}   </h2>
-            <div class="flex justify-end ">
-            <Link to="/add"><button className='btn btn-xs btn-primary'>Your Information</button></Link>             
-            </div>
-            <div class="overflow-x-auto">
-                <table class="table w-full">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Job</th>
-                            <th>Age</th>
-                            <th>Gender</th>
-                            <th>Location</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                    {/* <ul>
-                    {
-                    abouts.map(about => <li
-                        key={about._id}>
-                       name: {about.name} <br />
-                       Job: {about.job}
-                        <Link to={`/about/update/${about._id}`}><button className='btn btn-xs btn-success'>Update</button></Link>                    </li>)
+<>
 
-                }
-                    </ul> */}
-                    {
-                            abouts.map((a,index) => <tr key={a._id}>
-                                <th>{index+1}</th>
-                                <td>{a.job}</td>
-                                <td>{a.age}</td>
-                                <td>{a.gender}</td>
-                                <td>{a.location}</td>
-                                <td>
-                                    <Link to={`/about/update/${a._id}`}><button className='btn btn-xs btn-success'>Update</button></Link>
+<div class="card w-98 bg-neutral text-neutral-content">
+  <div class="card-body">
+  <div className="text-2xl border-solid border-1"> Name : {user.displayName}</div>
+                                <div className="text-2xl border-solid border-1">Email: {user.email}</div>
+                                <div className="text-2xl border-solid border-1"> profession: {abouts.job}</div>
+                                <div className="text-2xl border-solid border-1">Age: {abouts.age}</div>
+                                <div className="text-2xl border-solid border-1">Gender: {abouts.gender}</div>
+                                <div className="text-2xl border-solid border-1">Address: {abouts.location}</div>
+                                <div class="card-actions justify-end">
+                                    <Link to={`/about/update/${abouts._id}`}><button className='btn btn-success'>Update</button></Link>
                                     
-                                </td>
-                            </tr>)
-                        }
-                     </tbody>
-                </table>
-                </div>
-                </div>
-            
+                                </div>
+  </div>
+</div>
+
+
+<Footer></Footer>
+       
+</>            
     );
 };
 

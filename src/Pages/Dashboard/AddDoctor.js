@@ -36,6 +36,7 @@ const AddDoctor = () => {
                     name: data.name,
                     email: data.email,
                     specialty: data.specialty,
+                    experience: data.experience,
                     img: img
                 }
                 // send to your database 
@@ -115,7 +116,7 @@ const AddDoctor = () => {
                         {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                         {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                     </label>
-                </div>
+                </div> 
 
                 <div className="form-control w-full max-w-xs">
                     <label className="label">
@@ -129,6 +130,26 @@ const AddDoctor = () => {
                             >{service.name}</option>)
                         }
                     </select>
+                </div>
+
+                <div className="form-control w-full max-w-xs">
+                    <label className="label">
+                        <span className="label-text">Experience</span>
+                    </label>
+                    <input
+                        type="number"
+                        placeholder="Your Experience"
+                        className="input input-bordered w-full max-w-xs"
+                        {...register("experience", {
+                            required: {
+                                value: true,
+                                message: 'Experience is Required'
+                            }
+                        })}
+                    />
+                    <label className="label">
+                        {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
+                    </label>
                 </div>
 
                 <div className="form-control w-full max-w-xs">

@@ -6,6 +6,7 @@ import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading';
+import bg from '../../assets/images/bg.png';
 
 const Information = () => {
     const [disable, setDisable]=useState(0)
@@ -51,7 +52,7 @@ const onSubmits = async data => {
                     .then(res => res.json())
                     .then(inserted => {
                         if (inserted.insertedId) {
-                            toast.success('successfully')
+                            toast.success('Information successfully added')
                             reset();
                             setDisable(true);
                         }
@@ -69,8 +70,12 @@ if (isLoading) {
     return <Loading></Loading>
 }
     return (
-        <div>
-            <form onSubmit={handleSubmit(onSubmits)}>
+        <div style={{
+            background: `url(${bg})`,
+            backgroundSize: 'cover'
+        }} className="">
+            <h1 className='text-4xl' > User Information</h1>
+            <form className='border' onSubmit={handleSubmit(onSubmits)}>
 
 {/* <div className="form-control w-full max-w-xs">
     <label className="label">
@@ -95,11 +100,11 @@ if (isLoading) {
 </div> */}
 <div className="form-control w-full max-w-xs">
     <label className="label">
-        <span className="label-text">Job</span>
+        <span className="label-text">Profession</span>
     </label>
     <input
         type="text"
-        placeholder="Your Job"
+        placeholder="Your Profession"
         className="input input-bordered w-full max-w-xs"
         {...register("job", {
             required: {

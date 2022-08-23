@@ -39,7 +39,7 @@ const MyReview = () => {
                             <th></th>
                             <th>Avatar</th>
                             <th>Name</th>
-                            <th>Address</th>
+                            <th>Location</th>
                             <th>Review</th>
                             <th>Specialty</th>
                             <th>Action</th>
