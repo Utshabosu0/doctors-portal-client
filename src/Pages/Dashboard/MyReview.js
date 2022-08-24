@@ -31,9 +31,9 @@ const MyReview = () => {
 
     return (
         <div>
-            <h2 className="text-2xl">Manage : {reviews.length}</h2>
-            <div class="overflow-x-auto">
-                <table class="table w-full">
+            <h2 className="text-2xl">My Review : {reviews.length}</h2>
+            <div >
+                <table class="table-auto border-separate ">
                     <thead>
                         <tr>
                             <th></th>
@@ -45,7 +45,7 @@ const MyReview = () => {
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody >
                         {
                             reviews.map((review, index) => <ReviewRow
                                 key={review._key}

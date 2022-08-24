@@ -15,7 +15,7 @@ const MyPayment = () => {
 
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:5000/payment?email=${user.email}`, {
+            fetch(`http://localhost:5000/payment?patientEmail=${user.email}`, {
                 method: 'GET',
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -74,22 +74,25 @@ const MyPayment = () => {
             <Table striped bordered hover responsive className="table-sm">
             <thead>
               <tr>
-                <th>AppointmentID</th>
+                <th>Transaction Id
+</th>
                 <th>Name</th>
-                <th>Email</th>
+                <th>Treatment</th>
+                <th>appointmentDate</th>
                             <th>Price</th>
-                            <th>Treatment</th>
+                            
                             <th>Payment Status</th>
               </tr>
             </thead>
             <tbody>
               {payments.map((payment) => (
                 <tr key={payment._id}>
-                  <td>{payment.appointment}</td>
-                  <td>{payment.name}</td>
-                  <td>{payment.email}</td>
-                                <td>{payment.price}</td>
-                                <td>{payment.treatment}</td>
+                  <td>{payment.transactionId}</td>
+                  <td>{payment.patientName}</td>
+                  <td>{payment.patientTreatment}</td>
+                  <td>{payment.appointmentDate}</td>
+
+                                <td>{payment.patientPay}</td>
                   <td>
                     {payment?.appointment?(
                       <ReactToPrint

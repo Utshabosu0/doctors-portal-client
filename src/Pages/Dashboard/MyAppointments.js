@@ -13,7 +13,7 @@ const MyAppointments = () => {
 
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:5000/booking?patient=${user.email}`, {
+            fetch(`http://localhost:5000/booking?patientEmail=${user.email}`, {
                 method: 'GET',
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -53,7 +53,7 @@ const MyAppointments = () => {
     const todayDate = new Date();
     todayDate.setHours(0,0,0,0);
 
-    const futureApointments = appointments.filter(appointment => new Date(appointment.date) >= todayDate);
+    const futureApointments = appointments.filter(appointment => new Date(appointment.appointmentDate) >= todayDate);
     console.log(futureApointments, 'future');
 
     
@@ -71,9 +71,10 @@ const MyAppointments = () => {
                             <th>Date</th>
                             <th>Time</th>
                             <th>Treatment</th>
+                            <th>Doctor</th>
+                            <th>Pay</th>
                             <th>Payment</th>
                             <th>Action</th>
-                            <th>Review</th>
                         </tr>
                     </thead>
                     
@@ -82,24 +83,25 @@ const MyAppointments = () => {
                             futureApointments.map((a, index) => <tr key={a._id}>
                                 <th>{index + 1}</th>
                                 <td>{a.patientName}</td>
-                                <td>{a.date}</td>
-                                <td>{a.slot}</td>
-                                <td>{a.treatment}</td>
+                                <td>{a.appointmentDate}</td>
+                                <td>{a.appointmentSlot}</td>
+                                <td>{a.patientTreatment}</td>
+                                <td>{a.doctorName}</td>
+                                <td>{a.patientPay}</td>
                                 <td>
-                                    {(a.price && !a.paid) && <Link to={`/dashboard/payment/${a._id}`}><button className='btn btn-xs btn-success'>pay</button></Link>}
-                                    {(a.price && a.paid) && <div>
+                                    {(a.patientPay && !a.paid) && <Link to={`/dashboard/payment/${a._id}`}><button className='btn btn-xs btn-success'>pay</button></Link>}
+                                    {(a.patientPay && a.paid) && <div>
                                         <p><span className='text-success'>Paid</span></p>
                                         {/* <p>Transaction id: <span className='text-success'>{a.transactionId}</span></p> */}
                                     </div>}
                                 </td>
-                                <td>
+                                <td>{(a.patientPay && !a.paid) &&
                                 <button
                          onClick={() => handleRemove(a._id)}
                         className='delete-button text-center '>
-                        <FontAwesomeIcon className='delete-icon text-red-600 text-2xl' icon={faTrashAlt}></FontAwesomeIcon></button>
+                        <FontAwesomeIcon className='delete-icon text-red-600 text-2xl' icon={faTrashAlt}></FontAwesomeIcon></button>}
                                 </td>
                                 <td>
-                                <Link to="/review"><button className='btn btn-success'>Your Review</button></Link>             
 
                                 </td>
                             </tr>)

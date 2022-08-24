@@ -3,10 +3,12 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
+import useAdmin from '../../hooks/useAdmin';
 
 const Navbar = () => {
 
     const [user] = useAuthState(auth);
+    const [admin] = useAdmin(user);
 
     const logout = () => {
         signOut(auth);
@@ -20,9 +22,10 @@ const Navbar = () => {
         
         {/* <li><Link to="/review">Review</Link></li> */}
         <li><Link to="/contact">Contact</Link></li>
-        <li><Link to="/about">About</Link></li>
+        {user &&<li><Link to="/about">About</Link></li>}
+        
         {
-            user && <li><Link to="/dashboard">Dashboard</Link></li>
+            admin ?<li><Link to="/adminDashboard">Dashboard</Link></li>:<li><Link to="/dashboard">Dashboard</Link></li>
         }
         <li>{user ? <button className="btn btn-ghost" onClick={logout} >Sign Out</button> : <Link to="/login">Login</Link>}</li>
     </>

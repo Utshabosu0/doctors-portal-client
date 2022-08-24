@@ -74,7 +74,7 @@ if (isLoading) {
             background: `url(${bg})`,
             backgroundSize: 'cover'
         }} className="">
-            <h1 className='text-4xl' > User Information</h1>
+            <h1 className='text-4xl' > Your Information</h1>
             <form className='border' onSubmit={handleSubmit(onSubmits)}>
 
 {/* <div className="form-control w-full max-w-xs">

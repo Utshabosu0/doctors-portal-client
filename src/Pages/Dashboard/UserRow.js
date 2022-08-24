@@ -47,7 +47,7 @@ const UserRow = ({ user,index, refetch ,setDeletingUser }) => {
         <tr>
             <th>{index + 1}</th>
             <td>{email}</td>
-            <td>{role}</td>
+            <td>{role?role:'user'}</td>
             <td>{(role !== 'admin' && role !== 'doctor')? <div> <button onClick={makeAdmin} class="btn btn-xs">Make Admin</button> <button onClick={makeDoctor} class="btn btn-xs">Make Doctor</button></div> : ''}</td>
             <td>{(role !== 'admin')? <label onClick={() => setDeletingUser(user)} for="delete-confirm-modal" class="btn btn-xs btn-error">Remove User</label> : ''}</td>
            

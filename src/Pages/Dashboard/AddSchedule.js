@@ -3,11 +3,9 @@ import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 // import { useHistory } from 'react-router-dom';
-import { useQuery } from 'react-query';
-import Loading from '../Shared/Loading';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSquareMinus } from '@fortawesome/free-solid-svg-icons'
 const AddSchedule = () => {
-  const { isLoading } = useQuery()
 
     const weekDays = [
         {label:'All Days', value:'All Days'},
@@ -160,49 +158,46 @@ const AddSchedule = () => {
         setOneDay(dayRef.current.value);
   }
 
-  if (isLoading) {
-    return <Loading></Loading>
-}
+
 
 
     return (
-        <section className='add-service'>
-        <h3 className='text-center mb-3 fw-bold'>Add a new Schedule</h3>
-        
-        <form class="w-full max-w-lg" onSubmit={handleSubmit(onSubmit)}>
-  <div class="flex flex-wrap -mx-3 mb-6">
-    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        <section className='add-service grid-cols-1 border-solid border-1'>
+        <h3 className='text-center text-2xl'>Add a new Schedule</h3>
+        <br /><br />
+        <form class="w-full max-w-lg " onSubmit={handleSubmit(onSubmit)}>
+  <div class="flex flex-wrap  mb-6 ml-10">
+    <div class="w-full md:w-1/2 px-3 md:mb-0">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-7" for="grid-first-name">
         Service Name
       </label>
-      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane" {...register('name', { required: true })}/>
+      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Service Name" {...register('name', { required: true })}/>
     </div>
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-7" for="grid-first-name">
         Price
       </label>
-      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="number" placeholder="5000" {...register('price', { required: true })}/>
+      <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="number" placeholder="Amount" {...register('price', { required: true })}/>
     </div>
   </div>
   {/* day starts  */}
-  <div class="flex flex-wrap -mx-3 mb-6">
+  <div class="flex flex-wrap  mb-10 ">
     
 
-
-    <div class="flex flex-wrap -mx-3 mb-6">
+<div class="w-full md:w-1/2 px-3 md:mb-0">
     <div class="w-full px-3">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold  ml-10" for="grid-first-name">
         Days
       </label>
       {/* ADD dayS  */}
-        <div class='m-3'>
+        <div class='m-3 ml-2'>
             <div class='flex mt-3'>
-                <p class='fs-4 ms-4'>Add dayes</p>
+                <p class='fs-4 ms-4 ml-10'>Add dayes</p>
                 {dayButton && (
                     <button
                           onClick={handleDay}
                           style={{ cursor: 'pointer' }}
-                          class='bi bi-plus-square fs-4 ml-3 '
+                          class='btn btn-sm btn-outline btn-success ml-2'
                     >Add</button>
                 )}
                 {!dayButton && (
@@ -210,7 +205,7 @@ const AddSchedule = () => {
                         onClick={handleDay}
                         style={{ cursor: 'pointer' }}
                         class='ml-3 '
-                    >Minus</button>
+                    ><FontAwesomeIcon icon={faSquareMinus} /></button>
                 )}
             </div>
         </div>
@@ -218,10 +213,10 @@ const AddSchedule = () => {
             <div class='px-5'>
                 <div style={{ position: 'relative', marginBottom: '70px' }}>
                     <div class="w-full px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-4" for="grid-password">
                             Days
                         </label>
-                        <select ref={dayRef} onChange={dayChange} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text">
+                        <select ref={dayRef} onChange={dayChange} class="ml-4 appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text">
                                 <option disabled>Select Days</option>
                             {
                                 weekDays?.map(weekDay => 
@@ -233,7 +228,7 @@ const AddSchedule = () => {
                 <div>
                 <button
                 onClick={addDay}
-                className=''
+                className='ml-9 btn btn-sm btn-success'
                 type='button'
                 >
                  ADD
@@ -308,22 +303,21 @@ const AddSchedule = () => {
                   {/* END  */}
     </div>
   </div>
-  </div>
   {/* day ends  */}
-  <div class="flex flex-wrap -mx-3 mb-6">
-    <div class="w-full px-3">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+  <div class="w-full md:w-1/2 px-3 md:mb-0">
+    <div class="w-full">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold ml-10" for="grid-password">
         Slots
       </label>
       {/* ADD slotS  */}
-        <div class=' m-3  '>
+      <div class='m-3 ml-2'>
             <div class='flex mt-3'>
-                <p class='fs-4 ms-4'>Add Slotes</p>
+                <p class='fs-4 ms-4 ml-10'>Add Slotes</p>
                 {slotBtn && (
                     <button
                           onClick={handleslot}
                           style={{ cursor: 'pointer' }}
-                          class='bi bi-plus-square fs-4 ml-3 '
+                          class='btn btn-sm btn-outline btn-success ml-2'
                     >Add</button>
                 )}
                 {!slotBtn && (
@@ -331,15 +325,15 @@ const AddSchedule = () => {
                         onClick={handleslot}
                         style={{ cursor: 'pointer' }}
                         class='ml-3 '
-                    >Minus</button>
+                    ><FontAwesomeIcon icon={faSquareMinus} /></button>
                 )}
             </div>
         </div>
         {isSlot && (
             <div class='px-5'>
                 <div style={{ position: 'relative', marginBottom: '70px' }}>
-                    <div class='form-floating mb-3'>
-                    <label for='floatingTextarea'>Slots</label>
+                    <div class='form-floating mb-3 ml-5'>
+                    <label for='floatingTextarea' className='font-bold'>Slots</label>
                         {/* <textarea
                         class='form-control'
                         placeholder='Leave a comment here'
@@ -347,22 +341,23 @@ const AddSchedule = () => {
                         ref={slotRef}
                         ></textarea> */}
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                                 Start Time
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2" for="grid-first-name">
+                                 StartTime
                             </label>
-                            <input ref={startRef} onChange={handleStartTimeChange} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="time" />
+                            <input ref={startRef} onChange={handleStartTimeChange} class="ml-5 appearance-none block w-30 bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4  mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="time" />
                         </div>
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                                End Time
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ml-2" for="grid-first-name">
+                                EndTime
                             </label>
-                            <input onChange={handleEndTimeChange} ref={endRef} class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="time" />
+                            <input onChange={handleEndTimeChange} ref={endRef} class="ml-5 appearance-none block w-30 bg-gray-200 text-gray-700 border border-gray-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="time" />
                         </div>
                     </div>
                 <div>
                 <button
                 onClick={addSlot}
-                className=''
+                className='ml-14 btn btn-sm btn-success'
+
                 type='button'
                 >
                  ADD
@@ -437,9 +432,13 @@ const AddSchedule = () => {
                   {/* END  */}
     </div>
   </div>
-  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type='submit'>
+  </div>
+  
+  <div class=" mb-10  ml-60">
+  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-7 rounded-full " type='submit'>
   Submit
 </button>
+  </div>
 </form>
 
       </section>

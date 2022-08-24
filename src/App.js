@@ -36,6 +36,7 @@ import DoctorReview from './Pages/Dashboard/DoctorReview';
 import AddSchedule from './Pages/Dashboard/AddSchedule';
 import UpdateComment from './Pages/Dashboard/UpdateComment';
 import DoctorAddSchedule from './Pages/Dashboard/DoctorAddSchedule';
+import AdminDashboard from './Pages/Dashboard/AdminDashboard';
 
 function App() {
   return (
@@ -71,11 +72,29 @@ function App() {
           </RequireAuth>
         } />
         <Route path="dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} >
-          <Route path="appointment" element={<MyAppointments></MyAppointments>}></Route>
+          <Route index path="appointment" element={<MyAppointments></MyAppointments>}></Route>
           <Route path="review" element={<MyReview></MyReview>}></Route>
           <Route path="payment" element={<MyPayment></MyPayment>}></Route>
           <Route path="history" element={<MyHistory></MyHistory>}></Route>
           <Route path="payment/:id" element={<Payment></Payment>}></Route>
+          {/* <Route path="adminAppointment" element={<RequireAdmin><AdminAppointments></AdminAppointments></RequireAdmin>}></Route>
+          <Route path="pay" element={<RequireAdmin><PaymentModal></PaymentModal> </RequireAdmin>}></Route>
+          <Route path="updateBooking/:id" element={<RequireAdmin><UpdateBooking></UpdateBooking> </RequireAdmin>}></Route>
+          <Route path="addSchedule" element={<RequireAdmin><AddSchedule/> </RequireAdmin>}></Route>
+
+          <Route path="users" element={<RequireAdmin><Users></Users></RequireAdmin>}></Route>
+          <Route path="addDoctor" element={<RequireAdmin><AddDoctor></AddDoctor></RequireAdmin>}></Route>
+          <Route path="manageDoctor" element={<RequireAdmin><ManageDoctors></ManageDoctors></RequireAdmin>}></Route>
+          <Route path="manageReview" element={<RequireAdmin><ManageReviews></ManageReviews> </RequireAdmin>}></Route> */}
+          <Route path="doctorReview" element={<RequireDoctor><DoctorReview></DoctorReview> </RequireDoctor>}></Route>
+          <Route path="doctorAppointment" element={<RequireDoctor><DoctorAppointments></DoctorAppointments> </RequireDoctor>}></Route>
+          <Route path="updateComment/:id" element={<RequireDoctor><UpdateComment></UpdateComment> </RequireDoctor>}></Route>
+          <Route path="doctorAddSchedule" element={<RequireDoctor><DoctorAddSchedule></DoctorAddSchedule> </RequireDoctor>}></Route>
+
+        </Route>
+
+        
+        <Route path="adminDashboard" element={<RequireAuth><AdminDashboard></AdminDashboard></RequireAuth>} >
           <Route path="adminAppointment" element={<RequireAdmin><AdminAppointments></AdminAppointments></RequireAdmin>}></Route>
           <Route path="pay" element={<RequireAdmin><PaymentModal></PaymentModal> </RequireAdmin>}></Route>
           <Route path="updateBooking/:id" element={<RequireAdmin><UpdateBooking></UpdateBooking> </RequireAdmin>}></Route>
@@ -85,10 +104,10 @@ function App() {
           <Route path="addDoctor" element={<RequireAdmin><AddDoctor></AddDoctor></RequireAdmin>}></Route>
           <Route path="manageDoctor" element={<RequireAdmin><ManageDoctors></ManageDoctors></RequireAdmin>}></Route>
           <Route path="manageReview" element={<RequireAdmin><ManageReviews></ManageReviews> </RequireAdmin>}></Route>
-          <Route path="doctorReview" element={<RequireDoctor><DoctorReview></DoctorReview> </RequireDoctor>}></Route>
+          {/* <Route path="doctorReview" element={<RequireDoctor><DoctorReview></DoctorReview> </RequireDoctor>}></Route>
           <Route path="doctorAppointment" element={<RequireDoctor><DoctorAppointments></DoctorAppointments> </RequireDoctor>}></Route>
           <Route path="updateComment/:id" element={<RequireDoctor><UpdateComment></UpdateComment> </RequireDoctor>}></Route>
-          <Route path="doctorAddSchedule" element={<RequireDoctor><DoctorAddSchedule></DoctorAddSchedule> </RequireDoctor>}></Route>
+          <Route path="doctorAddSchedule" element={<RequireDoctor><DoctorAddSchedule></DoctorAddSchedule> </RequireDoctor>}></Route> */}
 
         </Route>
         <Route path="login" element={<Login />} />

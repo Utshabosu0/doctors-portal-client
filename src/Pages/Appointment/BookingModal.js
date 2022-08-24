@@ -7,26 +7,27 @@ import { useQuery } from 'react-query';
 import Loading from '../Shared/Loading';
 
 const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
-    const { data: doctors, isLoading } = useQuery('services', () => fetch('http://localhost:5000/doctors').then(res => res.json()))
+     const {  isLoading } = useQuery()
 
-    const { _id, name, slots, price } = treatment;
+    const { _id, doctorName, slots, pay,serviceName, doctorEmail} = treatment;
     const [user] = useAuthState(auth);
     const formattedDate = format(date, 'PP');
     const handleBooking = event => {
         event.preventDefault();
         const slot = event.target.slot.value;
-        const doctorName = event.target.doctorName.value;
+        // const doctorName = event.target.doctorName.value;
 
         const booking = {
             treatmentId: _id,
-            treatment: name,
-            date: formattedDate,
-            slot,
-            doctorName,
-            price,
-            patient: user.email,
+            patientTreatment: serviceName,
+            appointmentDate: formattedDate,
+            appointmentSlot:slot,
+            doctorName: doctorName,
+            doctorEmail:doctorEmail,
+            patientPay:pay,
+            patientEmail: user.email,
             patientName: user.displayName,
-            phone: event.target.phone.value
+            patientPhone: event.target.phone.value
         }
 
         fetch('http://localhost:5000/booking', {
@@ -58,8 +59,9 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
             <div className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
                     <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h3 className="font-bold text-xl text-blue-700">Booking for: {name}</h3>
+                    <h3 className="font-bold text-xl text-blue-700">Booking for: {serviceName}</h3>
                     <form onSubmit={handleBooking} className='grid grid-cols-1 gap-3 justify-items-center mt-2'>
+                        {/* <label htmlFor="" className="font-bold">Select Doctor Name</label>
                     <select name="doctorName" className="select select-bordered w-full max-w-xs">
                     {
                             doctors.map(doctor => <option
@@ -67,7 +69,7 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
                                 value={doctor.name}
                             >{doctor.name}</option>)
                         }
-                        </select>
+                        </select> */}
                         <input type="text" disabled value={format(date, 'PP')} className="input input-bordered w-full max-w-xs" />
                         <select name="slot" className="select select-bordered w-full max-w-xs">
                             {
@@ -79,6 +81,7 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
                         </select>
                         <input type="text" name="name" disabled value={user?.displayName || ''} className="input input-bordered w-full max-w-xs" />
                         <input type="email" name="email" disabled value={user?.email || ''} className="input input-bordered w-full max-w-xs" />
+
                         <input type="text" name="phone" placeholder="Phone Number" className="input input-bordered w-full max-w-xs" />
                         <input type="submit" value="Submit" className="btn btn-secondary w-full max-w-xs" />
                     </form>

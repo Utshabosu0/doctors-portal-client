@@ -10,7 +10,7 @@ const CheckoutForm = ({ appointment }) => {
     const [transactionId, setTransactionId] = useState('');
     const [clientSecret, setClientSecret] = useState('');
 
-    const { _id, price, patient, patientName,treatment,phone
+    const { _id, patientPay, patientEmail, patientName,patientTreatment,patientPhone,doctorName,doctorEmail,appointmentDate,appointmentSlot
     } = appointment;
 
     useEffect(() => {
@@ -20,7 +20,7 @@ const CheckoutForm = ({ appointment }) => {
                 'content-type': 'application/json',
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
             },
-            body: JSON.stringify({ price })
+            body: JSON.stringify({ patientPay })
         })
             .then(res => res.json())
             .then(data => {
@@ -29,7 +29,7 @@ const CheckoutForm = ({ appointment }) => {
                 }
             });
 
-    }, [price])
+    }, [patientPay])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -60,7 +60,7 @@ const CheckoutForm = ({ appointment }) => {
                     card: card,
                     billing_details: {
                         name: patientName,
-                        email: patient
+                        email: patientEmail
                     },
                 },
             },
@@ -80,12 +80,15 @@ const CheckoutForm = ({ appointment }) => {
             const payment = {
                 appointment: _id,
                 transactionId: paymentIntent.id,
-                email:patient,
-                name:patientName,
-                price:price,
-                treatment:treatment,
-                phone:phone
-
+                patientEmail:patientEmail,
+                patientName:patientName,
+                patientPay:patientPay,
+                patientTreatment:patientTreatment,
+                patientPhone:patientPhone,
+                doctorName:doctorName,
+                doctorEmail:doctorEmail,
+                appointmentDate:appointmentDate,
+                appointmentSlot:appointmentSlot
 
             }
             fetch(`http://localhost:5000/booking/${_id}`, {

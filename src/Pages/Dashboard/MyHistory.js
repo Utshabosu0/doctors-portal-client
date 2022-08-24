@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 // import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,7 +15,7 @@ const MyHistory = () => {
 
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:5000/booking?patient=${user.email}`, {
+            fetch(`http://localhost:5000/booking?patientEmail=${user.email}`, {
                 method: 'GET',
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -39,7 +39,7 @@ const MyHistory = () => {
 
     const todayDate = new Date();
     todayDate.setHours(0,0,0,0);
-    const pastAppointments = appointments.filter(appointment => new Date(appointment.date) < todayDate );
+    const pastAppointments = appointments.filter(appointment => new Date(appointment.appointmentDate) < todayDate );
     
 
     console.log(new Date(pastAppointments[0]?.date), 'past');
@@ -54,11 +54,12 @@ const MyHistory = () => {
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Name</th>
-                        <th>Date</th>
-                        <th>Time</th>
+                        <th>Doctor </th>
+<th>appointmentDate</th>
                         <th>Treatment</th>
-                        <th>Comment</th>
+                        <th>Doctor Comment</th>
+                        <th>Review</th>
+
                     </tr>
                 </thead>
                 
@@ -66,11 +67,12 @@ const MyHistory = () => {
                     {
                         pastAppointments.map((a, index) => <tr key={a._id}>
                             <th>{index + 1}</th>
-                            <td>{a.patientName}</td>
-                            <td>{a.date}</td>
-                            <td>{a.slot}</td>
-                            <td>{a.treatment}</td>
+                            <td>{a.doctorName}</td>
+                            <td>{a.appointmentDate}</td>
+                            <td>{a.patientTreatment}</td>
                             <td>{a.comment}</td>
+                            <td>                                <Link to="/review"><button className='btn btn-success'>Your Review</button></Link>             
+</td>
                         </tr>)
                     }
 

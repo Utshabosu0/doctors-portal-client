@@ -28,9 +28,9 @@ const ManageReviews = () => {
 
     return (
         <div>
-            <h2 className="text-2xl">Manage : {reviews.length}</h2>
-            <div class="overflow-x-auto">
-                <table class="table w-full ">
+            <h2 className="text-2xl">Reviews : {reviews.length}</h2>
+            <div >
+                <table class="table-auto border-separate  ">
                     <thead>
                         <tr className="hover">
                             <th></th>

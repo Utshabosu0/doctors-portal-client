@@ -5,6 +5,9 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 
 const AppointmentBanner = ({date, setDate}) => {
+    const disabledDays = [
+        { from: new Date(1997, 1, 18), to: new Date(2022, 7, 23) }
+      ];
     
     return (
         <div style={{
@@ -19,6 +22,7 @@ const AppointmentBanner = ({date, setDate}) => {
                         required
                         selected={date}
                         onSelect={setDate}
+                        disabled={disabledDays}
                     />
                 </div>
             </div>

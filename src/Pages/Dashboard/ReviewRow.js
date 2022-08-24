@@ -14,7 +14,7 @@ const ReviewRow = ({ review, index, refetch, setDeletingReview }) => {
             </div></td>
             <td>{name}</td>
             <td>{location}</td>
-            <td>{comment}</td>
+            <td >{comment}</td>
             <td>{specialty}</td>
             <td>
                 <label onClick={() => setDeletingReview(review)} for="delete-confirm-modal" class="btn btn-xs btn-error">Delete</label>
