@@ -44,9 +44,10 @@ const SignUp = () => {
 
     const onSubmit = async data => {
         await createUserWithEmailAndPassword(data.email, data.password);
-        await sendEmailVerification(data.email);
+        await sendEmailVerification(data.email)
         await updateProfile({ displayName: data.name });
         console.log('update done');
+    }
 
         // const user = {
         //     name:data.name,
@@ -71,7 +72,7 @@ const SignUp = () => {
         //             toast.error('Failed ');
         //         }
         //     })
-    }
+   
     return (
         <div className='flex h-screen justify-center items-center'>
             <div className="card w-96 bg-base-100 shadow-xl">

@@ -3,12 +3,10 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
-import useAdmin from '../../hooks/useAdmin';
 
 const Navbar = () => {
 
     const [user] = useAuthState(auth);
-    const [admin] = useAdmin(user);
 
     const logout = () => {
         signOut(auth);
@@ -18,14 +16,13 @@ const Navbar = () => {
     const menuItems = <>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/doctor">Doctor</Link></li>
+
         <li><Link to="/appointment">Appointment</Link></li>
-        
         {/* <li><Link to="/review">Review</Link></li> */}
         <li><Link to="/contact">Contact</Link></li>
         {user &&<li><Link to="/about">About</Link></li>}
-        
         {
-            admin ?<li><Link to="/adminDashboard">Dashboard</Link></li>:<li><Link to="/dashboard">Dashboard</Link></li>
+            user && <li><Link to="/dashboard">Dashboard</Link></li>
         }
         <li>{user ? <button className="btn btn-ghost" onClick={logout} >Sign Out</button> : <Link to="/login">Login</Link>}</li>
     </>
@@ -40,7 +37,7 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <a href='/' className="btn btn-ghost normal-case text-xl">Doctors Portal</a>
+                <a className="btn btn-ghost normal-case text-xl">Doctors Portal</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">

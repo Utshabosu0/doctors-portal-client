@@ -12,18 +12,18 @@ const PaymentModal = () => {
 
     const onSubmit=async data=>{
         const pay = {
-            price:data.price,
-            phone: data.phone,
-            appointment: data.appointment,
-            name: data.name,
-                    email: data.email,
-                    treatment: data.treatment,
+            patientPay:data.patientPay,
+            patientPhone: data.patientPhone,
+            appointmentId: data.appointmentId,
+            patientName: data.patientName,
+            patientEmail: data.patientEmail,
+                    patientTreatment: data.patientTreatment,
         }
             fetch('http://localhost:5000/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
-                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                    // 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 },
                 body: JSON.stringify(pay)
             })
@@ -49,57 +49,57 @@ const PaymentModal = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control w-full max-w-xs">
                             <label className="label">
-                                <span className="label-text">Appointment</span>
+                                <span className="label-text">Patient AppointmentID</span>
                             </label>
 
                             <input
                                 type="text"
-                                placeholder="Your AppointmentId"
+                                placeholder="Patient AppointmentId"
                                 className="input input-bordered w-full max-w-xs"
-                                {...register("appointment", {
+                                {...register("appointmentId", {
                                     required: {
                                         value: true,
-                                        message: 'Appointment is Required'
+                                        message: 'appointmentId is Required'
                                     }
                                 })}
                             />
                             <label className="label">
-                                {errors.appointment?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
+                                {errors.appointmentId?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
                             </label>
                         </div>
                     <div className="form-control w-full max-w-xs">
                             <label className="label">
-                                <span className="label-text">Name</span>
+                                <span className="label-text">Patient Name</span>
                             </label>
 
                             <input
                                 type="text"
-                                placeholder="Your Name"
+                                placeholder="Patient Name"
                                 className="input input-bordered w-full max-w-xs"
-                                {...register("name", {
+                                {...register("patientName", {
                                     required: {
                                         value: true,
-                                        message: 'Name is Required'
+                                        message: 'patientName is Required'
                                     }
                                 })}
                             />
                             <label className="label">
-                                {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
+                                {errors.patientName?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
                             </label>
                         </div>
 
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
-                                <span className="label-text">Email</span>
+                                <span className="label-text">Patient Email</span>
                             </label>
                             <input
                                 type="email"
-                                placeholder="Your Email"
+                                placeholder="Patient Email"
                                 className="input input-bordered w-full max-w-xs"
-                                {...register("email", {
+                                {...register("patientEmail", {
                                     required: {
                                         value: true,
-                                        message: 'Email is Required'
+                                        message: 'patientEmail is Required'
                                     },
                                     pattern: {
                                         value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
@@ -108,15 +108,15 @@ const PaymentModal = () => {
                                 })}
                             />
                             <label className="label">
-                                {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
-                                {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
+                                {errors.patientEmail?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
+                                {errors.patientEmail?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>}
                             </label>
                         </div>
                         <div className="form-control w-full max-w-xs">
                     <label className="label">
-                        <span className="label-text">treatment</span>
+                        <span className="label-text">Patient Treatment</span>
                     </label>
-                    <select {...register('treatment')} class="select input-bordered w-full max-w-xs">
+                    <select {...register('patientTreatment')} class="select input-bordered w-full max-w-xs">
                         {
                             services.map(service => <option
                                 key={service._id}
@@ -128,40 +128,40 @@ const PaymentModal = () => {
                 
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
-                                <span className="label-text">Price</span>
+                                <span className="label-text">Amount</span>
                             </label>
                             <input
                                 type="number"
-                                placeholder="Your Price"
+                                placeholder="Amount"
                                 className="input input-bordered w-full max-w-xs"
-                                {...register("price", {
+                                {...register("patientPay", {
                                     required: {
                                         value: true,
-                                        message: 'Price is Required'
+                                        message: 'patientPay is Required'
                                     }
                                 })}
                             />
                             <label className="label">
-                                {errors.price?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
+                                {errors.patientPay?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
                             </label>
                         </div>
                         <div className="form-control w-full max-w-xs">
                             <label className="label">
-                                <span className="label-text">Phone</span>
+                                <span className="label-text">Phone No</span>
                             </label>
                             <input
                                 type="number"
                                 placeholder="Your Phone"
                                 className="input input-bordered w-full max-w-xs"
-                                {...register("phone", {
+                                {...register("patientPhone", {
                                     required: {
                                         value: true,
-                                        message: 'Phone is Required'
+                                        message: 'patientPhone is Required'
                                     }
                                 })}
                             />
                             <label className="label">
-                                {errors.phone?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
+                                {errors.patientPhone?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
                             </label>
                         </div>
                         <input className='btn w-full max-w-xs text-white' type="submit" value="Pay" />

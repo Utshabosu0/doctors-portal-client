@@ -249,7 +249,7 @@ if (isLoading) {
 </div> */}
 <br />
 
-<input className='btn w-full max-w-xs text-white' disabled={disable} type="submit" value="Add" />
+<input className='btn w-full max-w-xs text-white' disabled={disable} type="submit"  />
 </form>
         </div>
     );

@@ -172,7 +172,7 @@ const handleUpdateUser = async e => {
 </div> */}
 <br />
 
-<input className='btn w-full max-w-xs text-white' type="submit" value="Add" />
+<input className='btn w-full max-w-xs text-white' type="submit"  />
 </form>
        
     );

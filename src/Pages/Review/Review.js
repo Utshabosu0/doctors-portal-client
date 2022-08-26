@@ -260,7 +260,7 @@ return (
                     })}
                 />
                 <label className="label">
-                    {errors.review?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
+                    {errors.comment?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
                 </label>
             </div>
 

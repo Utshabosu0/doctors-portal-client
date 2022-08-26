@@ -34,8 +34,9 @@ const AdminDashboard = () => {
                         </>
                 } */}
                     { admin && <>
+                        <li><Link to="/adminDashboard">Appointments</Link></li>
+
                         <li><Link to="/adminDashboard/addSchedule">Make Appointment Schedules</Link></li>
-                        <li><Link to="/adminDashboard/adminAppointment">Appointments</Link></li>
                         <li><Link to="/adminDashboard/manageReview">Reviews</Link></li>
                         <li><Link to="/adminDashboard/users">All Users</Link></li>
                         <li><Link to="/adminDashboard/addDoctor">Add a Doctor</Link></li>

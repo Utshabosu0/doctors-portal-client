@@ -15,14 +15,14 @@ const UpdateBooking = () => {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
-                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                // authorization: `Bearer ${localStorage.getItem('accessToken')}`
     
             },
             body: JSON.stringify(updatedBooking)
         })
             .then(res => res.json())
             .then(data => {
-                    alert('Update Booking');
+                    alert('Payment Update');
                     reset();
                 
             })

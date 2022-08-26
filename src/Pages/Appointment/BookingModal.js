@@ -3,11 +3,11 @@ import { format } from 'date-fns';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { toast } from 'react-toastify';
-import { useQuery } from 'react-query';
-import Loading from '../Shared/Loading';
+// import { useQuery } from 'react-query';
+// import Loading from '../Shared/Loading';
 
 const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
-     const {  isLoading } = useQuery()
+    //  const {  isLoading } = useQuery()
 
     const { _id, doctorName, slots, pay,serviceName, doctorEmail} = treatment;
     const [user] = useAuthState(auth);
@@ -50,9 +50,9 @@ const BookingModal = ({ date, treatment, setTreatment, refetch }) => {
             });
     }
 
-    if (isLoading) {
-        return <Loading></Loading>
-    }
+    // if (isLoading) {
+    //     return <Loading></Loading>
+    // }
     return (
         <div>
             <input type="checkbox" id="booking-modal" className="modal-toggle" />

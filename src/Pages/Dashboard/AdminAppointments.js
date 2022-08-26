@@ -39,7 +39,7 @@ const AdminAppointments = () => {
     // }, [user])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/bookings`)
+        fetch(`http://localhost:5000/booking-list`)
             .then(res => res.json())
             .then(data => setAppointments(data));
 
@@ -64,7 +64,6 @@ const AdminAppointments = () => {
         <div>
             <h2>Appointments: {appointments.length}</h2>
             <div class="flex justify-end ">
-            <Link to={`/dashboard/pay`}><button className='btn btn-xs btn-success'>Payment Page</button></Link>             
             </div>
             <div class="overflow-x-auto">
                 <table class="table w-full">
@@ -76,7 +75,10 @@ const AdminAppointments = () => {
                             <th>Date</th>
                             <th>Time</th>
                             <th>Treatment</th>
-                            <th>Payment Status</th>
+                            <th>Doctor</th>
+                            <th>Amount</th>
+                            <th> Status</th>
+                            <th>Action</th>
                             <th>Action</th>
 
                         </tr>
@@ -87,11 +89,13 @@ const AdminAppointments = () => {
                                 <th>{index + 1}</th>
                                 <td>{a._id}</td>
                                 <td>{a.patientName}</td>
-                                <td>{a.date}</td>
-                                <td>{a.slot}</td>
-                                <td>{a.treatment}</td>
+                                <td>{a.appointmentDate}</td>
+                                <td>{a.appointmentSlot}</td>
+                                <td>{a.patientTreatment}</td>
+                                <td>{a.doctorName}</td>
+                                <td>{a.patientPay}</td>
                                 <td>
-                                {(a.price && !a.paid)&& <Link to={`/dashboard/updateBooking/${a._id}`}><button className='btn btn-xs btn-success'>UpdateBooking</button></Link>
+                                {(a.price && !a.paid)&& <Link to={`/dashboard/updateBooking/${a._id}`}><button className='btn btn-xs btn-success'>Payment Update</button></Link>
 }
                                     {(a.price && a.paid) && <div>
                                         <p><span className='text-success'>Paid</span></p>
@@ -103,7 +107,13 @@ const AdminAppointments = () => {
                          onClick={() => handleRemove(a._id)}
                         className='delete-button text-center '>
                         <FontAwesomeIcon className='delete-icon text-red-600 text-2xl' icon={faTrashAlt}></FontAwesomeIcon></button>
+                                </td> <td>
+                                {(a.price && !a.paid)&&             <Link to={`/dashboard/pay`}><button className='btn btn-xs btn-success'>Payment Page</button></Link>             
+
+}
+                                   
                                 </td>
+
                             </tr>)
                         }
 

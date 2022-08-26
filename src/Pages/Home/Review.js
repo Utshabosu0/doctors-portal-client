@@ -4,7 +4,7 @@ const Review = ({ review }) => {
     return (
         <div className="card lg:max-w-lg bg-base-100 shadow-xl">
             <div className="card-body">
-                <p>{review.comment}</p>
+                <p>{review.message}</p>
                 <p>specialty: {review.specialty}</p>
                 <div className="flex items-center">
                     <div className="avatar">

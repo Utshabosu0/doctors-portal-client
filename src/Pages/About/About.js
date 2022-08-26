@@ -46,7 +46,7 @@ const About = () => {
                                 <div className="text-2xl border-solid border-1">Gender: {abouts.gender}</div>
                                 <div className="text-2xl border-solid border-1">Address: {abouts.location}</div>
                                 <div class="card-actions justify-end">
-                                    <Link to={`/about/update/${abouts._id}`}><button className='btn btn-success'>Update</button></Link>
+                                    <Link to={`/about/update/${abouts._id}`}><button className='btn btn-success'>Profile Update</button></Link>
                                     
                                 </div>
   </div>

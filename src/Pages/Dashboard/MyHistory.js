@@ -57,7 +57,7 @@ const MyHistory = () => {
                         <th>Doctor </th>
 <th>appointmentDate</th>
                         <th>Treatment</th>
-                        <th>Doctor Comment</th>
+                        <th>Doctor Instruction</th>
                         <th>Review</th>
 
                     </tr>
@@ -71,7 +71,7 @@ const MyHistory = () => {
                             <td>{a.appointmentDate}</td>
                             <td>{a.patientTreatment}</td>
                             <td>{a.comment}</td>
-                            <td>                                <Link to="/review"><button className='btn btn-success'>Your Review</button></Link>             
+                            <td>                                <Link to="/reviews"><button className='btn btn-success'>Your Review</button></Link>             
 </td>
                         </tr>)
                     }

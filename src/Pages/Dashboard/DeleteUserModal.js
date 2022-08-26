@@ -5,10 +5,11 @@ const DeleteUserModal = ({deletingUser, refetch, setDeletingUser}) => {
     const { email} = deletingUser;
     const handleDelete = () => {
         fetch(`http://localhost:5000/user/${email}`, {
-            method: 'DELETE',
-            headers: {
-                authorization: `Bearer ${localStorage.getItem('accessToken')}`
-            }
+            method: 'DELETE'
+            // ,
+            // headers: {
+            //     authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            // }
         })
             .then(res => res.json())
             .then(data => {

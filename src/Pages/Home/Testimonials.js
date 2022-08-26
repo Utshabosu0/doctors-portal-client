@@ -10,7 +10,7 @@ const Testimonials = () => {
         {
             _id:1,
             name: 'Winson',
-            comment: 'Hanif Ulubby is a great doctor! He is very understanding and listens to your concerns. He takes time with the patient to help them with their health issues! I highly recommend him to anyone looking for a specialist',
+            message: 'Hanif Ulubby is a great doctor! He is very understanding and listens to your concerns. He takes time with the patient to help them with their health issues! I highly recommend him to anyone looking for a specialist',
             location: 'savar',
             specialty: 'Teeth Orthodontics',
             img: people1
@@ -18,7 +18,7 @@ const Testimonials = () => {
         {
             _id:2,
             name: 'Luna',
-            comment: 'Zebunnesa Begum is a great doctor! He is very understanding and listens to your concerns. He takes time with the patient to help them with their health issues! I highly recommend him to anyone looking for a specialist',
+            message: 'Zebunnesa Begum is a great doctor! He is very understanding and listens to your concerns. He takes time with the patient to help them with their health issues! I highly recommend him to anyone looking for a specialist',
             location: 'Uttara',
             specialty: 'Teeth Cleaning',
             img: people2
@@ -26,7 +26,7 @@ const Testimonials = () => {
         {
             _id:3,
             name: 'Mila',
-            comment: 'Ashikur Rahman is a great doctor! He is very understanding and listens to your concerns. He takes time with the patient to help them with their health issues! I highly recommend him to anyone looking for a specialist',
+            message: 'Ashikur Rahman is a great doctor! He is very understanding and listens to your concerns. He takes time with the patient to help them with their health issues! I highly recommend him to anyone looking for a specialist',
             location: 'savar',
             specialty: 'Cosmetic Dentistry',
             img: people3

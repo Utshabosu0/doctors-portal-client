@@ -94,7 +94,7 @@ const MyPayment = () => {
 
                                 <td>{payment.patientPay}</td>
                   <td>
-                    {payment?.appointment?(
+                    {payment?.appointmentId?(
                       <ReactToPrint
                         trigger={() => (
                           <button className="btn btn-success mb-1">
@@ -142,21 +142,14 @@ const MyPayment = () => {
                         </thead>
                         <tbody>
                           
-                          <tr>
-                            <td
-                              colSpan={4}
-                              className="d-flex justify-content-end me-2"
-                            >
-                              <h4 className="fw-bold">Payment Id: {payment._id}</h4>
-                            </td>
-                          </tr>
+                        
                           <tr>
                             <td
                               colSpan={4}
                               className="d-flex justify-content-end me-2"
                             >
                               <h4 className="fw-bold">
-                                Name: {payment.name}
+                                Name: {payment.patientName}
                               </h4>
                             </td>
                           </tr>
@@ -166,7 +159,7 @@ const MyPayment = () => {
                               className="d-flex justify-content-end me-2"
                             >
                               <h4 className="fw-bold">
-                                Email: {payment.email}
+                                Email: {payment.patientEmail}
                               </h4>
                             </td>
                           </tr>
@@ -176,7 +169,7 @@ const MyPayment = () => {
                               className="d-flex justify-content-end me-2"
                             >
                               <h4 className="fw-bold">
-                                Phone: {payment.phone}
+                                Phone: {payment.patientPhone}
                               </h4>
                             </td>
                           </tr>
@@ -186,7 +179,7 @@ const MyPayment = () => {
                               className="d-flex justify-content-end me-2"
                             >
                               <h4 className="fw-bold">
-                              Treatment: {payment.treatment} 
+                              Doctor Name: {payment.doctorName} 
                               </h4>
                             </td>
                           </tr>
@@ -196,7 +189,17 @@ const MyPayment = () => {
                               className="d-flex justify-content-end me-2"
                             >
                               <h4 className="fw-bold">
-                                Price: {payment.price} Taka
+                              Treatment: {payment.patientTreatment} 
+                              </h4>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td
+                              colSpan={4}
+                              className="d-flex justify-content-end me-2"
+                            >
+                              <h4 className="fw-bold">
+                                Price: {payment.patientPay} Taka
                               </h4>
                             </td>
                           </tr>
@@ -216,7 +219,7 @@ const MyPayment = () => {
                               className="d-flex justify-content-end me-2"
                             >
                               <h3 className="fw-bold text-info">
-                                Payment Method: Stripe
+                                Thank Yor For Payment
                                 {/* #demo card Number
                                 4242424242424242 
                                 4000056655665556
