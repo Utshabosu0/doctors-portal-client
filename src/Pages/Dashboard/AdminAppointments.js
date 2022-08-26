@@ -52,7 +52,7 @@ const AdminAppointments = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.deletedCount > 0) {
-                    alert('Cancel Your Appointment');
+                    alert('Delete Appointment');
                     const cancelAppointment = appointments.filter(appointment => appointment._id !== id);
                     setAppointments(cancelAppointment);
                 }
