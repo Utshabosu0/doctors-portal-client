@@ -31,6 +31,11 @@ import AdminAppointments from './Pages/Dashboard/AdminAppointments';
 import UpdateBooking from './Pages/Dashboard/UpdateBooking';
 import PaymentModal from './Pages/Dashboard/PaymentModal';
 import Reset from './Pages/Login/Reset';
+import RequireDoctor from './Pages/Login/RequireDoctor';
+import DoctorAddSchedule from './Pages/Dashboard/DoctorAddSchedule';
+import MyService from './Pages/Dashboard/MyService';
+import DoctorAppointments from './Pages/Dashboard/DoctorAppointments';
+import PatientHistory from './Pages/Dashboard/PatientHistory';
 
 function App() {
   return (
@@ -83,6 +88,12 @@ function App() {
           <Route path="addDoctor" element={<RequireAdmin><AddDoctor></AddDoctor></RequireAdmin>}></Route>
           <Route path="manageDoctor" element={<RequireAdmin><ManageDoctors></ManageDoctors></RequireAdmin>}></Route>
           <Route path="manageReview" element={<RequireAdmin><ManageReviews></ManageReviews> </RequireAdmin>}></Route>
+
+        
+          <Route path="doctorAddSchedule" element={<RequireDoctor><DoctorAddSchedule></DoctorAddSchedule> </RequireDoctor>}></Route>
+          <Route path="doctorAppointment" element={<RequireDoctor><DoctorAppointments></DoctorAppointments> </RequireDoctor>}></Route>
+          <Route path="doctorService" element={<RequireDoctor><MyService></MyService> </RequireDoctor>}></Route>
+          <Route path="patientHistory" element={<RequireDoctor><PatientHistory></PatientHistory> </RequireDoctor>}></Route>
 
         </Route>
         <Route path="login" element={<Login />} />
